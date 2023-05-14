@@ -121,7 +121,7 @@ const Uploader = () => {
         method: "POST",
         body: formData,
       });*/
-      const response = await fetch("https://sbhacks-resum-ai.vercel.app/upload", {
+      const response = await fetch("https://sbhacks-resum-ai.vercel.app/api/upload", {
         method: "POST",
         body: formData,
       });
