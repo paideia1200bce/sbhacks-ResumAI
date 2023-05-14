@@ -8,6 +8,8 @@ const FormData = require("form-data");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage }).single("file");
 
+const apiKey = process.env.OPEN_API_KEY;
+
 // Vercel serverless function handler
 module.exports = (req, res) => {
   upload(req, res, async (err) => {
