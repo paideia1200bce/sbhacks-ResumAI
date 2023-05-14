@@ -54,7 +54,7 @@ const startServer = async () => {
   app.use(express.json({ limit: "50mb" }));
   app.use(
     cors({
-      origin: "*",
+      origin: "https://resum-ai.netlify.app",
       credentials: true,
       methods: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
       allowedHeaders:
