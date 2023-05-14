@@ -17,6 +17,9 @@ const Pool = require("pg").Pool;
 
 require("dotenv").config({ path: ".env" });
 
+const openapiKey = process.env.OPEN_API_KEY;
+
+
 const PORT = process.env.PORT || 3000;
 
 // const config = {
@@ -100,7 +103,8 @@ const startServer = async () => {
       });
 
       const response = await axios.post(
-        "http://localhost:8000/extract_work_text",
+        //"http://localhost:8000/extract_work_text",
+        "https://fastbaap.herokuapp.com/extract_work_text",
         formData,
         {
           headers: {
@@ -169,8 +173,7 @@ const startServer = async () => {
 
       // Make an API call to OpenAI's GPT API with the work experience content
 
-      const openai_api_key =
-        "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";
+      //const openai_api_key = "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";
 
       //const openai_api_url = ("https://api.openai.com/v1/engines/text-davinci-002/completions");
       //const prompt = `Summarize the following work experience:\n\n${workExperienceContent}\n\nSummary: `;
@@ -196,7 +199,7 @@ const startServer = async () => {
             {
               headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                Authorization: `Bearer ${openai_api_key}`,
+                Authorization: `Bearer ${openapiKey}`,
               },
             }
           );
