@@ -1,0 +1,96 @@
+/* styles/transition.css
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+}
+
+.transition-wrapper {
+  position: relative;
+}
+
+.transition-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../assets/catskills.jpg");
+  background-size: cover;
+  background-position: center;
+  animation: fadeOut 3.5s ease-in-out forwards;
+}
+
+.transition-content {
+  animation: fadeIn 4s ease-in-out forwards;
+} */
+
+/* styles/transition.css */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(1px);
+  }
+}
+
+.transition-wrapper {
+  position: relative;
+}
+
+.transition-background-entry {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../assets/resumai-background.jpg");
+  background-size: cover;
+  background-position: center;
+  animation: fadeOut 2.5s ease-in-out forwards;
+}
+
+.transition-background-exit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../assets/oxbow.jpg");
+  background-size: cover;
+  background-position: center;
+  animation: fadeOut 2.5s ease-in-out forwards;
+}
+.transition-content {
+  animation: fadeIn 2.5s ease-in-out forwards;
+}

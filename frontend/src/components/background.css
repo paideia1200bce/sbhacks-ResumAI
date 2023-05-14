@@ -1,0 +1,47 @@
+.fade-in {
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.bg-transition {
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  transition: background-image 0.8s ease-in;
+}
+
+.transparent-dropdown {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.5
+  ); /* Semi-transparent white background */
+  border: none;
+  color: #333; /* Text color */
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  appearance: none; /* Remove default appearance */
+  outline: none;
+}
+
+.transparent-dropdown:hover {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.7
+  ); /* Slightly less transparent on hover */
+}
+
+.transparent-dropdown:focus {
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Add a focus ring when the dropdown is focused */
+}

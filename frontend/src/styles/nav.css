@@ -1,0 +1,40 @@
+@keyframes hahaha {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3),
+      0 0 10px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.3),
+      0 0 20px rgba(127, 191, 255, 0.3), 0 0 40px rgba(127, 191, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.3),
+      0 0 15px rgba(255, 255, 255, 0.3), 0 0 25px rgba(255, 255, 255, 0.3),
+      0 0 25px rgba(127, 191, 255, 0.3), 0 0 45px rgba(127, 191, 255, 0.3);
+  }
+}
+
+.hahaha {
+  animation: hahaha 6s infinite;
+}
+
+/* .triangle-roof::before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  background-color: #2563eb;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+} */
+
+.triangle-roof::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: -18px;
+  width: 140%;
+  height: 20px; /* Increased the height to extend the sides */
+  background-color: #2563eb;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.9); /* Change the glow color to white */
+}

@@ -1,0 +1,17 @@
+/* @keyframes flame {
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3),
+      0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.3),
+      0 0 30px rgba(127, 191, 255, 1), 0 0 60px rgba(127, 191, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.3),
+      0 0 25px rgba(255, 255, 255, 1), 0 0 35px rgba(255, 255, 255, 0.3),
+      0 0 35px rgba(127, 191, 255, 1), 0 0 70px rgba(127, 191, 255, 0.3);
+  }
+}
+
+.flame {
+  animation: flame 6s infinite;
+} */

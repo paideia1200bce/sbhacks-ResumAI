@@ -1,0 +1,166 @@
+/* 
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-login,
+.btn-signup {
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.btn-login {
+  background-color: #007bff;
+  color: white;
+  margin-right: 16px; 
+}
+
+.btn-signup {
+  border: 1px solid #007bff;
+  color: #007bff;
+}
+
+.btn-login:hover {
+  background-color: #0056b3;
+  text-decoration: none;
+}
+
+.btn-signup:hover {
+  border-color: #0056b3;
+  color: #0056b3;
+  text-decoration: none;
+}  */
+
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3rem;
+  text-align: center;
+} */
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.outline-text {
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+@keyframes flame {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1),
+      0 0 10px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 0.1),
+      0 0 10px rgba(127, 191, 255, 0.1), 0 0 20px rgba(127, 191, 255, 0.1);
+  }
+  25% {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.1),
+      0 0 12px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 0.1),
+      0 0 12px rgba(127, 191, 255, 0.1), 0 0 40px rgba(127, 191, 255, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1),
+      0 0 10px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 0.1),
+      0 0 10px rgba(127, 191, 255, 0.1), 0 0 40px rgba(127, 191, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1),
+      0 0 15px rgba(255, 255, 255, 0.1), 0 0 25px rgba(255, 255, 255, 0.1),
+      0 0 15px rgba(127, 191, 255, 0.1), 0 0 45px rgba(127, 191, 255, 0.1);
+  }
+  75% {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.1),
+      0 0 12px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 0.1),
+      0 0 12px rgba(127, 191, 255, 0.1), 0 0 40px rgba(127, 191, 255, 0.1);
+  }
+}
+
+.flame {
+  animation: flame 10s infinite;
+}
+
+body {
+  overflow: hidden;
+}

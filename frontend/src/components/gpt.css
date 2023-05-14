@@ -1,0 +1,156 @@
+.image-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.submit-button {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.form-input::placeholder {
+  font-size: 0.8rem;
+}
+
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.images-container {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.save-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  padding: 4px;
+  cursor: pointer;
+}
+.squoosh-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  padding: 4px;
+  cursor: pointer;
+}
+.download-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  padding: 4px;
+  cursor: pointer;
+}
+@keyframes blowing {
+  0% {
+    box-shadow: 0 0 5px #9ddcff, 0 0 10px #9ddcff, 0 0 20px #9ddcff,
+      0 0 30px #9ddcff;
+  }
+  50% {
+    box-shadow: 0 0 10px #9ddcff, 0 0 20px #9ddcff, 0 0 30px #9ddcff,
+      0 0 40px #9ddcff;
+  }
+  100% {
+    box-shadow: 0 0 5px #9ddcff, 0 0 10px #9ddcff, 0 0 20px #9ddcff,
+      0 0 30px #9ddcff;
+  }
+}
+.glame {
+  position: relative;
+  width: 20px;
+  height: 60px;
+  background-color: #9ddcff;
+  border-radius: 50% 50% 50% 50%/100% 100% 0% 0%;
+  animation: blowing 2s infinite;
+}
+
+.glame::before,
+.glame::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background-color: #9ddcff;
+}
+
+.glame::before {
+  left: 0;
+  border-radius: 50% 0% 50% 0%/100% 0% 0% 0%;
+}
+
+.glame::after {
+  right: 0;
+  border-radius: 0% 50% 0% 50%/0% 100% 0% 0%;
+}
+/* Add this media query to the end of your CSS file */
+@media (max-width: 768px) {
+  .image-form {
+    padding: 0.5rem;
+  }
+
+  .form-input {
+    font-size: 0.9rem;
+  }
+
+  .submit-button {
+    font-size: 0.7rem;
+  }
+
+  .form-input::placeholder {
+    font-size: 0.7rem;
+  }
+
+  .image-grid {
+    gap: 8px;
+  }
+}

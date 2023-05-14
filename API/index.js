@@ -1,0 +1,267 @@
+const cors = require("cors");
+const express = require("express");
+const typeDefs = require("./schema");
+const resolvers = require("./resolvers");
+const multer = require("multer");
+const pdfParse = require("pdf-parse");
+const axios = require("axios");
+//const { models, db } = require("./db");
+const initializeDatabase = require("./db");
+const FormData = require("form-data");
+
+const { ApolloServer } = require("apollo-server-express");
+const { connect } = require("mongoose");
+//import { Pool, Client } from "pg";
+const Pool = require("pg").Pool;
+//const { typeDefs, resolvers } = require('./graphql');
+
+require("dotenv").config({ path: ".env" });
+
+const PORT = process.env.PORT || 3000;
+
+// const config = {
+//   user: "bruh",
+//   password: "Shashi@123",
+//   database: "postgres",
+//   host: "34.173.198.96",
+// };
+
+const startServer = async () => {
+  //const db = await connectToMongoDB();
+  const { models, db } = await initializeDatabase();
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context() {
+      //({ db });
+      return { models, db };
+    },
+  });
+
+  const app = express();
+
+  //const upload = multer({ dest: "uploads/" });
+  const storage = multer.memoryStorage();
+  const upload = multer({ storage: storage });
+
+  //using the graphql server as a middleware for the express server accessible via /graphql endpoint
+  server.applyMiddleware({ app });
+
+  //app.use(express.json());
+  app.use(express.json({ limit: "50mb" }));
+  app.use(
+    cors({
+      origin: "*",
+      credentials: true,
+      methods: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+      allowedHeaders:
+        "X-CSRF-Token,X-Requested-With,Accept,Accept-Version,Content-Length,Content-MD5,Content-Type,Date,X-Api-Version",
+      preflightContinue: true,
+      maxAge: 999999999,
+    })
+  );
+
+  app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send("Something went wrong!");
+  });
+
+  //normal endpoints accessible as well
+  app.post("/test", (req, res) => {
+    res.send("Hello World");
+  });
+
+  app.post("/upload", upload.single("file"), async (req, res) => {
+    // req.file is the uploaded file's metadata and buffer
+    console.log("upload endpoint accessed");
+    console.log(req.file);
+    const { buffer, originalname, mimetype } = req.file;
+
+    // Check if the file is a PDF
+    if (mimetype !== "application/pdf") {
+      return res.status(400).send("File must be a PDF.");
+    }
+
+    try {
+      // Process the PDF file using pdf-parse library
+
+      const pdfData = await pdfParse(buffer);
+
+      // Make an API call to the FastAPI endpoint with the file data
+      const formData = new FormData();
+      // formData.append(
+      //   "file",
+      //   new Blob([buffer], { type: mimetype }),
+      //   originalname
+      // );
+      formData.append("file", buffer, {
+        filename: originalname,
+        contentType: mimetype,
+      });
+
+      const response = await axios.post(
+        "http://localhost:8000/extract_work_text",
+        formData,
+        {
+          headers: {
+            ...formData.getHeaders(),
+          },
+        }
+      );
+
+      // Get the work_text_dict from the response
+      const work_text_dict = response.data;
+      console.log("response from fastboi", work_text_dict);
+      // Send the work_text_dict to the client
+      //res.status(200).json(work_text_dict);
+
+      function extractHeadings(text) {
+        // Define an array of common phrases used as headings in a resume
+        const commonHeadings = [
+          "WORK EXPERIENCE",
+          "EDUCATION",
+          "PROJECTS",
+          "SKILLS",
+          "ACHIEVEMENTS",
+          "CERTIFICATIONS",
+        ];
+
+        // Create a regex pattern to match the headings and their content
+        const headingPattern = commonHeadings
+          .map((heading) => `(${heading})`)
+          .join("|");
+        const contentPattern = `([\\s\\S]*?)(?:(?:\\n(?:${headingPattern})\\s*)|$)`;
+        const regexPattern = new RegExp(headingPattern + contentPattern, "g");
+
+        // Extract the content and store it in an object as key-value pairs
+        const resumeData = {};
+        let match;
+
+        while ((match = regexPattern.exec(pdfData.text)) !== null) {
+          const heading = match.slice(1).find((value) => value !== undefined);
+          const content = match[match.length - 1];
+
+          if (heading && content) {
+            resumeData[heading] = content.trim();
+          }
+        }
+
+        console.log(resumeData);
+        return resumeData;
+      }
+
+      const headings = extractHeadings(pdfData.text);
+      console.log("Headings:\n", headings);
+      //const workExperienceContent = headings["WORKEXPERIENCE"];
+      // const workExperienceRegex =
+      //   /(?:WORK EXPERIENCE\s*)([\s\S]*?)(?:(?:\nEDUCATION\s*)|(?:\nPROJECTS\s*))/;
+      // const workExperienceContent = workExperienceRegex.exec(pdfData.text)[1];
+
+      //this would contain the key, value pair for the sections
+      const workExperienceContent = pdfData.text;
+      //const workExperienceContent = preprocessText(headings["WORKEXPERIENCE"]);
+      // console.log(
+      //   "Work experience content for api req:\n",
+      //   workExperienceContent
+      // );
+
+      //const workExperienceJson = JSON.stringify(workExperienceContent);
+
+      // Make an API call to OpenAI's GPT API with the work experience content
+
+      const openai_api_key =
+        "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";
+
+      //const openai_api_url = ("https://api.openai.com/v1/engines/text-davinci-002/completions");
+      //const prompt = `Summarize the following work experience:\n\n${workExperienceContent}\n\nSummary: `;
+
+      //refactor to loop through the
+      async function enhanceSectionContent(sectionName, sectionContent) {
+        try {
+          const response = await axios.post(
+            "https://api.openai.com/v1/engines/text-davinci-002/completions",
+            JSON.stringify({
+              //prompt: `Given the user's input: "${userPrompt}", create a detailed description including the words photorealistic and high-quality for the interior design of a living space in a true-to-life manner.`,
+              //prompt: `You are a world-class resume coach and an expert in improving resumes. Given the user's resume content: "${workExperienceContent}", enhance and improve the content by rephrasing sentences, using more professional language, and improving the overall structure. Ensure that the improved version meets high professional standards, and focus on making valuable improvements to the textual content.`,
+              prompt: `You are a world-class resume coach and an expert in improving resumes. Given the user's resume content for the "${sectionName}" section: "${sectionContent}", enhance and improve the content by rephrasing sentences, using more professional language, and improving the overall structure. Ensure that the improved version meets high professional standards, and focus on making valuable improvements to the textual content.`,
+              //The description should capture the essence of the theme, include essential elements, and describe the atmosphere, furniture, decorations, color scheme, and other aspects of the room in a true-to-life manner.`,
+              max_tokens: 1024, // Increase max tokens if necessary
+              n: 1, // Generate multiple responses
+              stop: null, // Stop when encountering a newline character
+              //temperature: 0.9, // Adjust the temperature for more diverse outputs
+              top_p: 0.7, // Use top_p instead of temperature for more focused outputs
+              echo: false, // Do not include the input prompt in the response
+            }),
+            {
+              headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                Authorization: `Bearer ${openai_api_key}`,
+              },
+            }
+          );
+          // return response.data.choices[0].text.trim();
+          const generatedText = response.data.choices[0].text.trim();
+          console.log("generated improved resume:", generatedText);
+
+          //return res(generatedText);
+          //res.status(200).contentType("text/plain").send(generatedText);
+          // res.status(200).json({
+          //   work_text_dict: work_text_dict,
+          //   //generatedText: generatedText,
+          // });
+
+          return response.data.choices[0].text.trim();
+        } catch (error) {
+          console.error("Error generating detailed prompt:", error);
+          //throw error;
+          return sectionContent;
+        }
+      }
+
+      async function enhanceResumeSections() {
+        for (const sectionKey in work_text_dict) {
+          if (work_text_dict.hasOwnProperty(sectionKey)) {
+            const originalContent = work_text_dict[sectionKey];
+            console.log("original content:", originalContent);
+            const enhancedContent = await enhanceSectionContent(
+              sectionKey,
+              originalContent
+            );
+            console.log("enhanced content:", enhancedContent);
+            work_text_dict[sectionKey] = enhancedContent;
+          }
+        }
+      }
+
+      enhanceResumeSections().then(() => {
+        console.log("Enhanced resume sections:", work_text_dict);
+        res.status(200).json({
+          work_text_dict,
+          //generatedText: generatedText,
+        });
+      });
+
+      return "pdf handler accessed";
+    } catch (error) {
+      console.error("Error processing PDF file:", error);
+      res.status(500);
+      // .send("Failed to process PDF file.");
+      return "failed to process pdf file";
+    }
+
+    // Process the PDF file (e.g., extract text, analyze content, etc.)
+    // This part depends on the specific PDF processing library you choose.
+    // See the following example for a simple way to read the PDF content
+    // TODO: Process the PDF content using a PDF processing library
+
+    // Send a response
+    //res.send("PDF file processed successfully");
+    return "pdf handler accessed";
+  });
+
+  app.listen(PORT, () => {
+    console.log(`listening for requests on port ${PORT}`);
+  });
+};
+
+startServer();

@@ -1,0 +1,40 @@
+#root {
+  margin: 1 auto;
+  text-align: center;
+}
+
+.my-input::placeholder {
+  color: white;
+}
+
+/* @keyframes flameLogin {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.9),
+      0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.9),
+      0 0 10px rgba(127, 191, 255, 0.8), 0 0 40px rgba(127, 191, 255, 0.9);
+  }
+  25% {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.8),
+      0 0 12px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.9),
+      0 0 12px rgba(127, 191, 255, 0.8), 0 0 40px rgba(127, 191, 255, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+      0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.9),
+      0 0 10px rgba(127, 191, 255, 0.8), 0 0 40px rgba(127, 191, 255, 0.9);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+      0 0 15px rgba(255, 255, 255, 0.8), 0 0 25px rgba(255, 255, 255, 0.9),
+      0 0 15px rgba(127, 191, 255, 0.8), 0 0 45px rgba(127, 191, 255, 0.9);
+  }
+  75% {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.8),
+      0 0 12px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.9),
+      0 0 12px rgba(127, 191, 255, 0.8), 0 0 40px rgba(127, 191, 255, 0.9);
+  }
+}
+
+.flameLogin {
+  animation: flame 20s infinite;
+} */

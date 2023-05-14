@@ -1,0 +1,61 @@
+@keyframes clowing {
+  0% {
+    box-shadow: 0 0 5px #9ddcff, 0 0 10px #9ddcff, 0 0 20px #9ddcff,
+      0 0 30px #9ddcff;
+  }
+  50% {
+    box-shadow: 0 0 10px #9ddcff, 0 0 20px #9ddcff, 0 0 30px #9ddcff,
+      0 0 40px #9ddcff;
+  }
+  100% {
+    box-shadow: 0 0 5px #9ddcff, 0 0 10px #9ddcff, 0 0 20px #9ddcff,
+      0 0 30px #9ddcff;
+  }
+}
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+.clame {
+  position: relative;
+  width: 20px;
+  height: 60px;
+  background-color: #9ddcff;
+  border-radius: 50% 50% 50% 50%/100% 100% 0% 0%;
+  animation: clowing 2s infinite;
+}
+
+.clame::before,
+.clame::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background-color: #9ddcff;
+}
+
+.clame::before {
+  left: 0;
+  border-radius: 50% 0% 50% 0%/100% 0% 0% 0%;
+}
+
+.clame::after {
+  right: 0;
+  border-radius: 0% 50% 0% 50%/0% 100% 0% 0%;
+}
+
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.high-opacity {
+  background-color: rgba(28, 49, 68, 0.85);
+}

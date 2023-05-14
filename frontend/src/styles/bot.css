@@ -1,0 +1,34 @@
+.chat-widget-container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  bottom: 5%;
+  left: 542%;
+  z-index: 9999;
+}
+
+.glowing-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+  opacity: 0.8;
+  z-index: -1;
+  animation: glowing 3s linear infinite;
+}
+
+@keyframes glowing {
+  0% {
+    box-shadow: 0 0 5px #f093fb, 0 0 15px #f093fb, 0 0 20px #f093fb,
+      0 0 30px #f093fb;
+  }
+  50% {
+    box-shadow: 0 0 10px #f5576c, 0 0 20px #f5576c, 0 0 25px #f5576c,
+      0 0 35px #f5576c;
+  }
+  100% {
+    box-shadow: 0 0 5px #f093fb, 0 0 15px #f093fb, 0 0 20px #f093fb,
+      0 0 30px #f093fb;
+  }
+}
