@@ -170,7 +170,7 @@ const startServer = async () => {
       // Make an API call to OpenAI's GPT API with the work experience content
 
       const openai_api_key =
-        "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";
+        "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";
 
       //const openai_api_url = ("https://api.openai.com/v1/engines/text-davinci-002/completions");
       //const prompt = `Summarize the following work experience:\n\n${workExperienceContent}\n\nSummary: `;
@@ -183,13 +183,14 @@ const startServer = async () => {
             JSON.stringify({
               //prompt: `Given the user's input: "${userPrompt}", create a detailed description including the words photorealistic and high-quality for the interior design of a living space in a true-to-life manner.`,
               //prompt: `You are a world-class resume coach and an expert in improving resumes. Given the user's resume content: "${workExperienceContent}", enhance and improve the content by rephrasing sentences, using more professional language, and improving the overall structure. Ensure that the improved version meets high professional standards, and focus on making valuable improvements to the textual content.`,
-              prompt: `You are a world-class resume coach and an expert in improving resumes. Given the user's resume content for the "${sectionName}" section: "${sectionContent}", enhance and improve the content by rephrasing sentences, using more professional language, and improving the overall structure. Ensure that the improved version meets high professional standards, and focus on making valuable improvements to the textual content.`,
+              //prompt: `You are a world-class resume coach and an expert in improving resumes. Given the user's resume content for the "${sectionName}" section: "${sectionContent}", enhance and improve the content by rephrasing sentences, using more professional language, and improving the overall structure. Ensure that the improved version meets high professional standards, and focus on making valuable improvements to the textual content.`,
+              prompt: `revamp the content for the "${sectionName}" section provided by the user: "${sectionContent}". Elevate the content by rewording sentences, incorporating professional language, and optimizing the overall structure. Emphasize creating significant enhancements to the textual content, ensuring it adheres to the highest professional standards.`,
               //The description should capture the essence of the theme, include essential elements, and describe the atmosphere, furniture, decorations, color scheme, and other aspects of the room in a true-to-life manner.`,
               max_tokens: 1024, // Increase max tokens if necessary
               n: 1, // Generate multiple responses
               stop: null, // Stop when encountering a newline character
-              //temperature: 0.9, // Adjust the temperature for more diverse outputs
-              top_p: 0.7, // Use top_p instead of temperature for more focused outputs
+              temperature: 0.8, // Adjust the temperature for more diverse outputs
+              //top_p: 0.7, // Use top_p instead of temperature for more focused outputs
               echo: false, // Do not include the input prompt in the response
             }),
             {

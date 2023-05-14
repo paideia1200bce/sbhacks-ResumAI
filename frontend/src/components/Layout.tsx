@@ -24,7 +24,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               to="/"
               className="text-lg font-semibold text-blue-800 hover:text-blue-600"
             >
-              <h1 className="text-2xl font-semibold text-white rounded p-2 bruh mr-3 mb-1">
+              <h1 className="text-3xl font-semibold text-white rounded p-2 bruh mr-3 mb-1">
                 ResumAI
               </h1>
             </Link>
@@ -32,7 +32,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="rounded">
             <Link
               to="/about"
-              className="text-lg font-semibold text-blue-800 hover:text-blue-600"
+              className="text-lg font-semibold text-gray-400 hover:text-blue-600"
             >
               <FontAwesomeIcon icon={faInfoCircle} size="2x" />
             </Link>

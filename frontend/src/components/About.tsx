@@ -1,6 +1,8 @@
 import backgroundPic from "../assets/resumai-background.jpg";
 import { Link } from "react-router-dom";
 import { FiX } from "react-icons/fi";
+import "../styles/pulse.css";
+
 const About = () => {
   return (
     <div
@@ -9,8 +11,8 @@ const About = () => {
         backgroundImage: `url(${backgroundPic})`,
       }}
     >
-      <div className="bg-blue-400 p-8 bg-opacity-30 backdrop-blur-md rounded-lg shadow-md w-full max-w-2xl mx-auto border border-black">
-        <Link to="/" className="position: relative top-2 right-2 text-blue">
+      <div className="bg-blue-400 p-8 bg-opacity-30 backdrop-blur-md rounded-lg shadow-md w-full max-w-2xl mx-auto border-2 border-black bruh">
+        <Link to="/" className="position: relative top-2 right-2 text-white">
           <FiX size={34} />
         </Link>
         <h2
@@ -24,19 +26,9 @@ const About = () => {
         >
           About the Project
         </h2>
+        <hr className="border-t border-white w-full mb-2" />
 
         <div style={{ maxHeight: "309px", overflowY: "auto" }}>
-          {/* <p
-            className="text-left text-white font-bold text-2xl"
-            style={{
-              fontFamily: "Roboto, sans-serif",
-              letterSpacing: "0.05em",
-              textShadow:
-                "0px 2px 4px rgba(0, 0, 0, 0.5), 0px 4px 6px rgba(0, 0, 0, 0.25)",
-            }}
-          >
-            An Ode to Hæli:
-          </p> */}
           <p
             className="text-left text-white font-medium text-m"
             style={{
@@ -48,7 +40,7 @@ const About = () => {
           ></p>
           <br />
           <p
-            className="text-left text-white font-bold text-2xl"
+            className="text-left mb-2 text-white font-bold text-2xl"
             style={{
               fontFamily: "Roboto, sans-serif",
               letterSpacing: "0.05em",
@@ -73,7 +65,23 @@ const About = () => {
               className="hover:text-slate-300"
             >
               {" "}
-              Amogh Prakash{" "}
+              Amogh Prakash{","}
+            </a>
+            <a
+              //href="https://www.linkedin.com/in/amoghprak/"
+              target="_blank"
+              className="hover:text-slate-300"
+            >
+              {" "}
+              Isabelle{","}
+            </a>
+            <a
+              //href="https://www.linkedin.com/in/amoghprak/"
+              target="_blank"
+              className="hover:text-slate-300"
+            >
+              {" "}
+              Kim{","}
             </a>
           </p>
           <br />

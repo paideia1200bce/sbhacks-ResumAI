@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+gunicorn
+pymupdf
+pandas
+unidecode
+numpy
+python-multipart

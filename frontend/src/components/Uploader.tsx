@@ -97,7 +97,7 @@ const Uploader = () => {
     //accessed by the searchFilter component
     //console.log("activeSearch from Home.tsx", activeSearch);
     setCollapsedFeedback(!collapsedFeedback);
-    setResumeData({});
+    setResumeData(null);
   };
 
   const handleSubmit = async (e: any) => {
@@ -163,24 +163,36 @@ const Uploader = () => {
         >
           {/* ... */}
           <div className="mt-4">
-            <h1 className="block mb-4 text-white">Upload your resume (PDF):</h1>
+            <h1
+              className="text-2xl font-semibold mb-6 text-center text-white"
+              style={{
+                fontFamily: "Roboto, sans-serif",
+                letterSpacing: "0.05em",
+                textShadow:
+                  "0px 2px 4px rgba(0, 0, 0, 0.5), 0px 4px 6px rgba(0, 0, 0, 0.25)",
+              }}
+            >
+              Upload your resume (PDF):
+            </h1>
             <ResumeUpload onFileUpload={handleSelectedFile} />
           </div>
         </div>
         {/* ... */}
-        <button
-          type="submit"
-          className="px-4 py-2 text-white font-semibold rounded hover:bg-opacity-80 mt-2 transition-all"
-          style={{
-            backdropFilter: "blur(10px)",
-            backgroundColor: "rgba(37, 99, 235, 0.6)",
-          }}
-          onClick={() => {
-            setCollapsedFeedback(!collapsedFeedback);
-          }}
-        >
-          Enhance
-        </button>
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className={`px-4 py-2 text-white font-semibold rounded hover:bg-opacity-80 mt-2 transition-all `}
+            style={{
+              backdropFilter: "blur(10px)",
+              backgroundColor: "rgba(37, 99, 235, 0.6)",
+            }}
+            onClick={() => {
+              setCollapsedFeedback(!collapsedFeedback);
+            }}
+          >
+            Enhance
+          </button>
+        </div>
       </form>
       {resumeData && (
         <div

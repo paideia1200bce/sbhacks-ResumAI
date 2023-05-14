@@ -39,30 +39,9 @@ const FeedbackView: React.FC<FeedbackProps> = ({
 
   const { work_text_dict } = resumeResponse;
 
-  // const saveAsPDF = () => {
-  //   const element = document.createElement("div");
-  //   element.innerHTML = resumeResponse.replace(/\n/g, "<br>");
-  //   element.style.fontFamily = "Arial, sans-serif";
-  //   element.style.fontSize = "12px";
-  //   element.style.display = "none";
-  //   document.body.appendChild(element);
-
-  //   const opt = {
-  //     margin: 1,
-  //     filename: "enhanced_resume.pdf",
-  //     image: { type: "jpeg", quality: 0.98 },
-  //     html2canvas: { scale: 2 },
-  //     jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-  //   };
-
-  //   html2pdf().from(element).set(opt).save();
-
-  //   document.body.removeChild(element);
-  // };
-
   const saveAsPDF = () => {
     const element = document.createElement("div");
-    element.innerHTML = resumeResponse["work_text_dict"].Education;
+    element.innerHTML = formattedText;
     element.style.fontSize = "16px";
     element.style.fontFamily = "Arial, sans-serif";
 
@@ -78,6 +57,11 @@ const FeedbackView: React.FC<FeedbackProps> = ({
   };
 
   console.log("resumeResponse from prop: ", work_text_dict);
+
+  //.map(([key, value]: [any, any]) => `${key}\n\n${value}\n\n`)
+  const formattedText = Object.entries(work_text_dict)
+    .map(([key, value]: [any, any]) => `\n${value}\n\n`)
+    .join("");
 
   return (
     // <div className="min-h-screen flex items-center justify-center bg-black py-12 px-4 sm:px-6 lg:px-8">
@@ -95,15 +79,15 @@ const FeedbackView: React.FC<FeedbackProps> = ({
                 to="/"
                 className="text-lg font-semibold text-blue-800 hover:text-blue-600"
               >
-                <h1 className="text-2xl font-semibold text-white rounded p-2 bruh mr-3 mb-1">
+                <h1 className="text-3xl font-semibold text-white rounded p-2 bruh mr-3 mb-1">
                   ResumAI
                 </h1>
               </Link>
             </div>
-            <div className="rounded">
+            <div className="rounded mt-2">
               <Link
                 to="/about"
-                className="text-lg font-semibold text-blue-800 hover:text-blue-600"
+                className="text-lg font-semibold text-gray-800 hover:text-blue-600"
               >
                 <FontAwesomeIcon icon={faInfoCircle} size="2x" />
               </Link>
@@ -112,7 +96,7 @@ const FeedbackView: React.FC<FeedbackProps> = ({
         </nav>
       </div>
 
-      <div className="relative bruh max-w-md border-2 border-black backdrop-blur-md bg-blue-500 bg-opacity-20 w-full space-y-8 p-6 rounded-lg shadow-lg">
+      <div className="relative bruh w-1/2 border-2 border-black backdrop-blur-md bg-blue-500 bg-opacity-20 space-y-8 p-6 rounded-lg shadow-lg">
         <button
           className="absolute mt-2 ml-2 top-2 left-2 text-white"
           onClick={onToggleView}
@@ -141,17 +125,24 @@ const FeedbackView: React.FC<FeedbackProps> = ({
             readOnly
             className="w-full h-96 px-3 py-2 text-white bg-black border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-orange-500"
           /> */}
-          {/* {resumeResponse &&
-            Object.entries(resumeResponse).map(([key, value]) => (
-              <div key={key}>
-                <h3 className="text-xl font-semibold">{key}</h3>
-              </div>
-            ))} */}
-          <textarea
-            value={resumeResponse["work_text_dict"].Education}
-            readOnly
-            className="w-full h-96 px-3 py-2 text-white bg-black border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-orange-500"
-          />
+          {resumeResponse ? (
+            <>
+              <textarea
+                value={formattedText}
+                readOnly
+                className="w-full h-96 px-3 py-2 text-white bg-black border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+              <button
+                className="bg-blue-600 text-white py-2 px-4 rounded mt-4"
+                onClick={saveAsPDF}
+              >
+                Save as PDF
+              </button>
+            </>
+          ) : (
+            <div className="text-white">Loading...</div>
+          )}
+
           {/* {!isLoading ? (
             Object.entries(work_text_dict).map(([key, value]) => (
               <div key={key}>
@@ -164,12 +155,6 @@ const FeedbackView: React.FC<FeedbackProps> = ({
           ) : (
             <Loader />
           )} */}
-          <button
-            className="bg-blue-600 text-white py-2 px-4 rounded mt-4"
-            onClick={saveAsPDF}
-          >
-            Save as PDF
-          </button>
         </div>
       </div>
     </div>
