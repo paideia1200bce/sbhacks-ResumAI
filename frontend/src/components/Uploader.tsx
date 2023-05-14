@@ -117,7 +117,11 @@ const Uploader = () => {
       const formData = new FormData();
       formData.append("file", file);
       setIsLoading(true);
-      const response = await fetch("http://localhost:3000/upload", {
+      /*const response = await fetch("http://localhost:3000/upload", {
+        method: "POST",
+        body: formData,
+      });*/
+      const response = await fetch("https://sbhacks-resum-ai.vercel.app/upload", {
         method: "POST",
         body: formData,
       });
