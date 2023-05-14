@@ -13,6 +13,11 @@ const apiKey = process.env.OPEN_API_KEY;
 // Vercel serverless function handler
 module.exports = (req, res) => {
   upload(req, res, async (err) => {
+    
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    
     if (err) {
       console.error("Multer error:", err);
       return res.status(500).send("Failed to process the file.");
