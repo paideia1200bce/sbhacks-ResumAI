@@ -35,7 +35,7 @@ const delay = setContext(
 const cache = new InMemoryCache();
 const http = createUploadLink({
   //uri: "https://ambrosia-garden.vercel.app/graphql",
-  uri: "http://localhost:3000/graphql",
+  uri: "https://sbhacks-resum-ai.vercel.app/graphql",
 });
 
 const link = ApolloLink.from([delay, http]);
